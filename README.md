@@ -21,7 +21,7 @@ See [seikichi/pronto-infer-example](https://github.com/seikichi/pronto-infer-exa
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'pronto-infer
+gem 'pronto-infer'
 ```
 
 And then execute:
