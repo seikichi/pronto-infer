@@ -11,7 +11,9 @@
 You need to specify location of infer output by passing `PRONTO_INFER_OUT_DIR` env variable e.g:
 
 ```bash
-PRONTO_INFER_OUT_DIR=infer-out run --index
+> export PRONTO_INFER_PROJECT_ROOT_DIR=. # NOTE: optional
+> export PRONTO_INFER_OUT_DIR=infer-out 
+> pronto run --index
 ```
 
 See [seikichi/pronto-infer-example](https://github.com/seikichi/pronto-infer-example) for more details.

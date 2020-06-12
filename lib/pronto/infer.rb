@@ -22,6 +22,10 @@ module Pronto
       ENV['PRONTO_INFER_OUT_DIR'] || (raise 'Please set `PRONTO_INFER_OUT_DIR` to use pronto-infer')
     end
 
+    def infer_project_root_dir
+      File.expand_path(ENV['PRONTO_INFER_PROJECT_ROOT_DIR'] || '.')
+    end
+
     def valid_patch?(patch)
       patch.additions.positive?
     end
@@ -39,15 +43,15 @@ module Pronto
     def infer_offences
       @infer_offences ||=
         begin
-          pattern = File.join(infer_out_dir, 'report.json')
-          Dir.glob(pattern).flat_map(&method(:read_infer_report))
+          path = File.join(infer_out_dir, 'report.json')
+          read_infer_report(path)
         end
     end
 
     def read_infer_report(path)
       report = JSON.parse(File.read(path))
       report.map do |r|
-        Offence.new(File.join(Dir.pwd, r['file']), r['line'], r['qualifier'])
+        Offence.new(File.join(infer_project_root_dir, r['file']), r['line'], r['qualifier'])
       end
     end
 
